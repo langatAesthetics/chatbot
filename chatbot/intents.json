@@ -1,0 +1,49 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": [
+                "hello",
+                "hi",
+                "hey",
+                "good morning",
+                "good evening",
+                "rada"
+            ],
+            "responses": [
+                "Hello! How can I help you today?",
+                "Hi there!",
+                "Welcome! How may I assist you?",
+                "safi sana niaje"
+
+            ]
+        },
+        {
+            "tag": "goodbye",
+            "patterns": [
+                "bye",
+                "goodbye",
+                "see you",
+                "exit"
+            ],
+            "responses": [
+                "Goodbye!",
+                "See you again soon!",
+                "Take care!"
+            ]
+        },
+        {
+            "tag": "how_are_you",
+            "patterns": [
+                "how are you",
+                "how are you doing",
+                "are you okay"
+            ],
+            "responses": [
+                "I'm doing great!",
+                "I'm functioning perfectly!",
+                "Doing well, thank you."
+            ]
+        }
+    ]
+}

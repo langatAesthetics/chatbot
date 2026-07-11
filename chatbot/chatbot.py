@@ -1,21 +1,38 @@
-from chatbot.rules import RULES, DEFAULT_RESPONSE
+import json
+import random
+
+from chatbot.nlp import tokenize
+from chatbot.nlp import stem_tokens
 
 
 class ChatBot:
-    """
-    A simple rule-based chatbot.
-
-    """
+    def __init__(self):
+        with open(
+            "chatbot/intents.json",
+            "r",
+            encoding="utf-8"
+        ) as file:
+            self.intents = json.load(file)
 
     def get_response(self, message: str) -> str:
-        """
-        Process a user message and return a response.
-        
-        """
+        tokens = tokenize(message)
+        tokens = stem_tokens(tokens)
 
-        normalized_message = message.strip().lower()
+        print(f"Tokens: {tokens}")
 
-        if normalized_message in RULES:
-            return RULES[normalized_message]
+        for intent in self.intents["intents"]:
+            for pattern in intent["patterns"]:
+                pattern_tokens = tokenize(pattern)
+                pattern_tokens = stem_tokens(pattern_tokens)
 
-        return DEFAULT_RESPONSE
+                if all(
+                    token in tokens
+                    for token in pattern_tokens
+                ):
+                    return random.choice(
+                        intent["responses"]
+                    )
+
+        return (
+            "I'm sorry, I don't understand that yet."
+        )
